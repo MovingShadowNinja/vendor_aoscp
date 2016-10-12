@@ -1,7 +1,7 @@
 #
 # This policy configuration will be used by all products that
-# inherit from AOKP
+# inherit from CypherOS
 #
 
 BOARD_SEPOLICY_DIRS += \
-    vendor/aokp/sepolicy
+    vendor/aoscp/sepolicy

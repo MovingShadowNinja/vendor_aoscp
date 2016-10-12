@@ -1,4 +1,4 @@
-[Android Open Kang Project](http://aokp.co)
+[Android Open Source Cypher Project]
 ====================================
 
 
@@ -12,7 +12,7 @@ Initializing Repository
 
 Init core trees without any device/kernel/vendor :
 
-    $ repo init -u https://github.com/AOKP/platform_manifest.git -b mm
+    $ repo init -u https://github.com/CypherOS/platform_manifest.git -b n7.0
 
 sync repo :
 
@@ -32,6 +32,6 @@ After the sync is finished, please read the [instructions from the Android site]
 You can also build (and see how long it took) for specific devices (eg. hammerhead) like this:
 
     . build/envsetup.sh
-    lunch aokp_hammerhead-userdebug && time make rainbowfarts
+    lunch aoscp_hammerhead-userdebug
 
 Remember to `make clean` every now and then!

@@ -1,4 +1,4 @@
 # Inherit common CM stuff
-$(call inherit-product, vendor/aokp/configs/common.mk)
+$(call inherit-product, vendor/aoscp/configs/common.mk)
 
 PRODUCT_SIZE := mini

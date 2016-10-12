@@ -1,6 +1,30 @@
-PRODUCT_BRAND ?= aokp
+PRODUCT_BRAND ?= aoscp
 
 SUPERUSER_EMBEDDED := true
+
+# Include versioning information
+# Format: Major.minor.maintenance(-TAG)
+export AOSCP_VERSION := 3.0.1
+
+export AOSCP_API := Cheesecake
+
+AOSCP_DISPLAY_VERSION := $(AOSCP_VERSION)
+
+export ROM_VERSION := $(AOSCP_VERSION)-$(shell date -u +%Y%m%d)
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.modversion=$(ROM_VERSION) \
+    ro.aoscp.version=$(AOSCP_VERSION) \
+	ro.aoscp.device=$(AOSCP_DEVICE) \
+	ro.aoscp.display.version=$(AOSCP_DISPLAY_VERSION) \
+	ro.aoscp.releasetype=$(AOSCP_BUILDTYPE) \
+	ro.aoscp.api=$(AOSCP_API)
+	
+ifeq ($(AOSCP_BUILDTYPE),)
+        # AOSCP_BUILDTYPE is not defined
+	AOSCP_BUILDTYPE := unofficial
+
+    AOSCP_VERSION=$(TARGET_PRODUCT)_$(AOSCP_BUILDTYPE)
+endif
 
 ifneq ($(TARGET_SCREEN_WIDTH) $(TARGET_SCREEN_HEIGHT),$(space))
 # determine the smaller dimension
@@ -12,7 +36,7 @@ TARGET_BOOTANIMATION_SIZE := $(shell \
   fi )
 
 # get a sorted list of the sizes
-bootanimation_sizes := $(subst .zip,, $(shell ls vendor/aokp/prebuilt/bootanimation))
+bootanimation_sizes := $(subst .zip,, $(shell ls vendor/aoscp/prebuilt/bootanimation))
 bootanimation_sizes := $(shell echo -e $(subst $(space),'\n',$(bootanimation_sizes)) | sort -rn)
 
 # find the appropriate size and set
@@ -29,14 +53,14 @@ endef
 $(foreach size,$(bootanimation_sizes), $(call check_and_set_bootanimation,$(size)))
 
 ifeq ($(TARGET_BOOTANIMATION_HALF_RES),true)
-PRODUCT_BOOTANIMATION := vendor/aokp/prebuilt/bootanimation/halfres/$(TARGET_BOOTANIMATION_NAME).zip
+PRODUCT_BOOTANIMATION := vendor/aoscp/prebuilt/bootanimation/halfres/$(TARGET_BOOTANIMATION_NAME).zip
 else
-PRODUCT_BOOTANIMATION := vendor/aokp/prebuilt/bootanimation/$(TARGET_BOOTANIMATION_NAME).zip
+PRODUCT_BOOTANIMATION := vendor/aoscp/prebuilt/bootanimation/$(TARGET_BOOTANIMATION_NAME).zip
 endif
 endif
 
 # Common dictionaries
-PRODUCT_PACKAGE_OVERLAYS += vendor/aokp/overlay/dictionaries
+PRODUCT_PACKAGE_OVERLAYS += vendor/aoscp/overlay/dictionaries
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
 ifeq ($(PRODUCT_GMS_CLIENTID_BASE),)
@@ -77,50 +101,50 @@ endif
 
 # Backup Tool
 PRODUCT_COPY_FILES += \
-    vendor/aokp/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
-    vendor/aokp/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
-    vendor/aokp/prebuilt/common/bin/50-aokp.sh:system/addon.d/50-aokp.sh \
-    vendor/aokp/prebuilt/common/bin/blacklist:system/addon.d/blacklist \
-    vendor/aokp/prebuilt/common/bin/99-backup.sh:system/addon.d/99-backup.sh \
-    vendor/aokp/prebuilt/common/etc/backup.conf:system/etc/backup.conf
+    vendor/aoscp/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
+    vendor/aoscp/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
+    vendor/aoscp/prebuilt/common/bin/50-aoscp.sh:system/addon.d/50-aoscp.sh \
+    vendor/aoscp/prebuilt/common/bin/blacklist:system/addon.d/blacklist \
+    vendor/aoscp/prebuilt/common/bin/99-backup.sh:system/addon.d/99-backup.sh \
+    vendor/aoscp/prebuilt/common/etc/backup.conf:system/etc/backup.conf
 
 # Backup Services whitelist
 PRODUCT_COPY_FILES += \
-    vendor/aokp/configs/permissions/backup.xml:system/etc/sysconfig/backup.xml
+    vendor/aoscp/configs/permissions/backup.xml:system/etc/sysconfig/backup.xml
 
 # Signature compatibility validation
 PRODUCT_COPY_FILES += \
-    vendor/aokp/prebuilt/common/bin/otasigcheck.sh:install/bin/otasigcheck.sh
+    vendor/aoscp/prebuilt/common/bin/otasigcheck.sh:install/bin/otasigcheck.sh
 
 # init.d support
 PRODUCT_COPY_FILES += \
-    vendor/aokp/prebuilt/common/etc/init.d/00start:system/etc/init.d/00start \
-    vendor/aokp/prebuilt/common/etc/init.d/01sysctl:system/etc/init.d/01sysctl \
-    vendor/aokp/prebuilt/common/etc/sysctl.conf:system/etc/sysctl.conf \
-    vendor/aokp/prebuilt/common/bin/sysinit:system/bin/sysinit
+    vendor/aoscp/prebuilt/common/etc/init.d/00start:system/etc/init.d/00start \
+    vendor/aoscp/prebuilt/common/etc/init.d/01sysctl:system/etc/init.d/01sysctl \
+    vendor/aoscp/prebuilt/common/etc/sysctl.conf:system/etc/sysctl.conf \
+    vendor/aoscp/prebuilt/common/bin/sysinit:system/bin/sysinit
 
 # userinit support
 ifneq ($(TARGET_BUILD_VARIANT),user)
 PRODUCT_COPY_FILES += \
-    vendor/aokp/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit
+    vendor/aoscp/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit
 endif
 
-# AOKP-specific init file
+# AOSCP-specific init file
 PRODUCT_COPY_FILES += \
-    vendor/aokp/prebuilt/common/etc/init.local.rc:root/init.aokp.rc \
+    vendor/aoscp/prebuilt/common/etc/init.local.rc:root/init.aoscp.rc \
 
 # Installer
 PRODUCT_COPY_FILES += \
-    vendor/aokp/prebuilt/common/bin/persist.sh:install/bin/persist.sh \
-    vendor/aokp/prebuilt/common/etc/persist.conf:system/etc/persist.conf
+    vendor/aoscp/prebuilt/common/bin/persist.sh:install/bin/persist.sh \
+    vendor/aoscp/prebuilt/common/etc/persist.conf:system/etc/persist.conf
 
 PRODUCT_COPY_FILES += \
-    vendor/aokp/prebuilt/common/lib/libmicrobes_jni.so:system/lib/libmicrobes_jni.so \
-    vendor/aokp/prebuilt/common/etc/resolv.conf:system/etc/resolv.conf
+    vendor/aoscp/prebuilt/common/lib/libmicrobes_jni.so:system/lib/libmicrobes_jni.so \
+    vendor/aoscp/prebuilt/common/etc/resolv.conf:system/etc/resolv.conf
 
 # Copy over added mimetype supported in libcore.net.MimeUtils
 PRODUCT_COPY_FILES += \
-    vendor/aokp/prebuilt/common/lib/content-types.properties:system/lib/content-types.properties
+    vendor/aoscp/prebuilt/common/lib/content-types.properties:system/lib/content-types.properties
 
 # Enable SIP+VoIP on all targets
 PRODUCT_COPY_FILES += \
@@ -131,32 +155,30 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/keyboards/Vendor_045e_Product_028e.kl:system/usr/keylayout/Vendor_045e_Product_0719.kl
 
 PRODUCT_COPY_FILES += \
-    vendor/aokp/configs/permissions/com.aokp.android.xml:system/etc/permissions/com.aokp.android.xml
+    vendor/aoscp/configs/permissions/com.aoscp.android.xml:system/etc/permissions/com.aoscp.android.xml
 
 # Include CM audio files
-include vendor/aokp/configs/cm_audio.mk
+include vendor/aoscp/configs/cm_audio.mk
 
 # Theme engine
-include vendor/aokp/configs/themes_common.mk
+include vendor/aoscp/configs/themes_common.mk
 
 ifneq ($(TARGET_DISABLE_CMSDK), true)
 # CMSDK
-include vendor/aokp/configs/cmsdk_common.mk
+include vendor/aoscp/configs/cmsdk_common.mk
 endif
 
-# Required AOKP packages
+# Required AOSCP packages
 PRODUCT_PACKAGES += \
     BluetoothExt \
     CellBroadcastReceiver \
     Development \
     LatinIME \
     LatinImeDictionaryPack \
-    mGerrit \
     Microbes \
     Stk
-#    ROMControl \
 
-# Optional AOKP packages
+# Optional AOSCP packages
 PRODUCT_PACKAGES += \
     libemoji \
     Terminal \
@@ -167,7 +189,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     librsjni
 
-# Custom CM packages
+# Custom packages
 PRODUCT_PACKAGES += \
     AudioFX \
     CMAudioService \
@@ -175,17 +197,13 @@ PRODUCT_PACKAGES += \
     CMWallpapers \
     CMFileManager \
     CMSettingsProvider \
-    CyanogenSetupWizard \
-    Eleven \
     ExactCalculator \
     Launcher3 \
     LiveLockScreenService \
     LockClock \
-    Trebuchet \
     WeatherManagerService \
     WeatherProvider \
-    SoundRecorder \
-    Screencast
+    SoundRecorder
 
 # Exchange support
 PRODUCT_PACKAGES += \
@@ -274,47 +292,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.root_access=3
 
 # Common overlay
-DEVICE_PACKAGE_OVERLAYS += vendor/aokp/overlay/common
-
-PRODUCT_VERSION_MAJOR = 13
-PRODUCT_VERSION_MINOR = 0
-PRODUCT_VERSION_MAINTENANCE = 0-RC0
+DEVICE_PACKAGE_OVERLAYS += vendor/aoscp/overlay/common
 
 # Version information used on all builds
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_VERSION_TAGS=release-keys USER=android-build BUILD_UTC_DATE=$(shell date +"%s")
 
-DATE = $(shell vendor/aokp/tools/getdate)
-AOKP_BRANCH=nougat
-
-ifneq ($(AOKP_BUILD),)
-    # AOKP_BUILD=<goo version int>/<build string>
-    PRODUCT_PROPERTY_OVERRIDES += \
-        ro.goo.developerid=aokp \
-        ro.goo.rom=aokp \
-        ro.goo.version=$(shell echo $(AOKP_BUILD) | cut -d/ -f1)
-
-    AOKP_VERSION=$(TARGET_PRODUCT)_$(AOKP_BRANCH)_$(shell echo $(AOKP_BUILD) | cut -d/ -f2)
-else
-    ifeq ($(AOKP_BUILDTYPE),)
-        # AOKP_BUILDTYPE not defined
-	AOKP_BUILDTYPE := unofficial
-    endif
-
-    AOKP_VERSION=$(TARGET_PRODUCT)_$(AOKP_BRANCH)_$(AOKP_BUILDTYPE)_$(DATE)
-endif
-
-AOKP_DISPLAY_VERSION := $(AOKP_VERSION)
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.aokp.version=$(AOKP_VERSION) \
-    ro.aokp.branch=$(AOKP_BRANCH) \
-    ro.aokp.device=$(AOKP_DEVICE) \
-    ro.aokp.releasetype=$(AOKP_BUILDTYPE) \
-    ro.modversion=$(AOKP_VERSION) \
-    ro.aokp.display.version=$(AOKP_DISPLAY_VERSION)
-
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
--include vendor/aokp/configs/partner_gms.mk
+-include vendor/aoscp/configs/partner_gms.mk
 -include vendor/cyngn/product.mk
 
 $(call prepend-product-if-exists, vendor/extra/product.mk)

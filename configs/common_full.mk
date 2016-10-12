@@ -1,13 +1,13 @@
-# Inherit common AOKP stuff
-$(call inherit-product, vendor/aokp/configs/common.mk)
+# Inherit common AOSCP stuff
+$(call inherit-product, vendor/aoscp/configs/common.mk)
 
 # Bring in all video files
 $(call inherit-product, frameworks/base/data/videos/VideoPackage2.mk)
 
 PRODUCT_SIZE := full
 
-# Include AOKP LatinIME dictionaries
-PRODUCT_PACKAGE_OVERLAYS += vendor/aokp/overlay/dictionaries
+# Include AOSCP LatinIME dictionaries
+PRODUCT_PACKAGE_OVERLAYS += vendor/aoscp/overlay/dictionaries
 
 PRODUCT_PACKAGES += \
     VideoEditor \

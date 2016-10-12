@@ -1,4 +1,4 @@
-# AOKP Extras
+# AOSCP Extras
 
 on init
     export ANDROID_CACHE /cache

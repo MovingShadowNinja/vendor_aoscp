@@ -1,2 +1,2 @@
-# Inherit common AOKP stuff
-$(call inherit-product, vendor/aokp/configs/common_full.mk)
+# Inherit common AOSCP stuff
+$(call inherit-product, vendor/aoscp/configs/common_full.mk)

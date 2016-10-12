@@ -66,15 +66,15 @@ function setup_vendor() {
         exit 1
     fi
 
-    export AOKP_ROOT="$3"
-    if [ ! -d "$AOKP_ROOT" ]; then
-        echo "\$AOKP_ROOT must be set and valid before including this script!"
+    export AOSCP_ROOT="$3"
+    if [ ! -d "$AOSCP_ROOT" ]; then
+        echo "\$AOSCP_ROOT must be set and valid before including this script!"
         exit 1
     fi
 
     export OUTDIR=vendor/"$VENDOR"/"$DEVICE"
-    if [ ! -d "$AOKP_ROOT/$OUTDIR" ]; then
-        mkdir -p "$AOKP_ROOT/$OUTDIR"
+    if [ ! -d "$AOSCP_ROOT/$OUTDIR" ]; then
+        mkdir -p "$AOSCP_ROOT/$OUTDIR"
     fi
 
     VNDNAME="$6"
@@ -82,9 +82,9 @@ function setup_vendor() {
         VNDNAME="$DEVICE"
     fi
 
-    export PRODUCTMK="$AOKP_ROOT"/"$OUTDIR"/"$VNDNAME"-vendor.mk
-    export ANDROIDMK="$AOKP_ROOT"/"$OUTDIR"/Android.mk
-    export BOARDMK="$AOKP_ROOT"/"$OUTDIR"/BoardConfigVendor.mk
+    export PRODUCTMK="$AOSCP_ROOT"/"$OUTDIR"/"$VNDNAME"-vendor.mk
+    export ANDROIDMK="$AOSCP_ROOT"/"$OUTDIR"/Android.mk
+    export BOARDMK="$AOSCP_ROOT"/"$OUTDIR"/BoardConfigVendor.mk
 
     if [ "$4" == "true" ] || [ "$4" == "1" ]; then
         COMMON=1
@@ -641,15 +641,15 @@ function get_file() {
 # Convert apk|jar .odex in the corresposing classes.dex
 #
 function oat2dex() {
-    local AOKP_TARGET="$1"
+    local AOSCP_TARGET="$1"
     local OEM_TARGET="$2"
     local SRC="$3"
     local TARGET=
     local OAT=
 
     if [ -z "$BAKSMALIJAR" ] || [ -z "$SMALIJAR" ]; then
-        export BAKSMALIJAR="$AOKP_ROOT"/vendor/aokp/build/tools/smali/baksmali.jar
-        export SMALIJAR="$AOKP_ROOT"/vendor/aokp/build/tools/smali/smali.jar
+        export BAKSMALIJAR="$AOSCP_ROOT"/vendor/aoscp/build/tools/smali/baksmali.jar
+        export SMALIJAR="$AOSCP_ROOT"/vendor/aoscp/build/tools/smali/smali.jar
     fi
 
     # Extract existing boot.oats to the temp folder
@@ -666,11 +666,11 @@ function oat2dex() {
         FULLY_DEODEXED=1 && return 0 # system is fully deodexed, return
     fi
 
-    if [ ! -f "$AOKP_TARGET" ]; then
+    if [ ! -f "$AOSCP_TARGET" ]; then
         return;
     fi
 
-    if grep "classes.dex" "$AOKP_TARGET" >/dev/null; then
+    if grep "classes.dex" "$AOSCP_TARGET" >/dev/null; then
         return 0 # target apk|jar is already odexed, return
     fi
 
@@ -681,7 +681,7 @@ function oat2dex() {
 
         if get_file "$OAT" "$TMPDIR" "$SRC"; then
             java -jar "$BAKSMALIJAR" -x -o "$TMPDIR/dexout" -c "$BOOTOAT" -d "$TMPDIR" "$TMPDIR/$(basename "$OAT")"
-        elif [[ "$AOKP_TARGET" =~ .jar$ ]]; then
+        elif [[ "$AOSCP_TARGET" =~ .jar$ ]]; then
             # try to extract classes.dex from boot.oat for framework jars
             java -jar "$BAKSMALIJAR" -x -o "$TMPDIR/dexout" -c "$BOOTOAT" -d "$TMPDIR" -e "/$OEM_TARGET" "$BOOTOAT"
         else
@@ -760,7 +760,7 @@ function extract() {
     local HASHLIST=( ${PRODUCT_COPY_FILES_HASHES[@]} ${PRODUCT_PACKAGES_HASHES[@]} )
     local COUNT=${#FILELIST[@]}
     local SRC="$2"
-    local OUTPUT_ROOT="$AOKP_ROOT"/"$OUTDIR"/proprietary
+    local OUTPUT_ROOT="$AOSCP_ROOT"/"$OUTDIR"/proprietary
     local OUTPUT_TMP="$TMPDIR"/"$OUTDIR"/proprietary
 
     if [ "$SRC" = "adb" ]; then
@@ -900,7 +900,7 @@ function extract_firmware() {
     local FILELIST=( ${PRODUCT_COPY_FILES_LIST[@]} )
     local COUNT=${#FILELIST[@]}
     local SRC="$2"
-    local OUTPUT_DIR="$AOKP_ROOT"/"$OUTDIR"/radio
+    local OUTPUT_DIR="$AOSCP_ROOT"/"$OUTDIR"/radio
 
     if [ "$VENDOR_RADIO_STATE" -eq "0" ]; then
         echo "Cleaning firmware output directory ($OUTPUT_DIR).."

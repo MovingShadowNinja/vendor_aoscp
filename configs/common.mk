@@ -11,17 +11,28 @@ export AOSCP_API := Cheesecake
 AOSCP_DISPLAY_VERSION := $(AOSCP_VERSION)
 
 export ROM_VERSION := $(AOSCP_VERSION)-$(shell date -u +%Y%m%d)
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.modversion=$(ROM_VERSION) \
-    ro.aoscp.version=$(AOSCP_VERSION) \
-	ro.aoscp.device=$(AOSCP_DEVICE) \
-	ro.aoscp.display.version=$(AOSCP_DISPLAY_VERSION) \
-	ro.aoscp.releasetype=$(AOSCP_BUILDTYPE) \
-	ro.aoscp.api=$(AOSCP_API)
 
 ifeq ($(AOSCP_BUILDTYPE),)
         # AOSCP_BUILDTYPE is not defined
 	AOSCP_BUILDTYPE := unofficial
+endif
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.modversion=$(ROM_VERSION) \
+    ro.aoscp.version=$(AOSCP_VERSION) \
+    ro.aoscp.device=$(AOSCP_DEVICE) \
+    ro.aoscp.display.version=$(AOSCP_DISPLAY_VERSION) \
+    ro.aoscp.releasetype=$(AOSCP_BUILDTYPE) \
+    ro.aoscp.api=$(AOSCP_API)
+
+AOSCP_ZIP_VERSION := $(AOSCP_VERSION)
+
+ifeq ($(AOSCP_BUILDTYPE),)
+	AOSCP_ZIP_VERSION := $(shell date -u +%Y%m%d)
+else
+ifeq ($(AOSCP_BUILDTYPE),"nightly")
+	AOSCP_ZIP_VERSION := $(shell date -u +%Y%m%d)
+endif # nightly
 endif
 
 AOSCP_TARGET_ZIP=$(TARGET_PRODUCT)_$(AOSCP_BUILDTYPE)_$(AOSCP_VERSION)

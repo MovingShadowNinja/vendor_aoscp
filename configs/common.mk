@@ -27,10 +27,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 AOSCP_ZIP_VERSION := $(AOSCP_VERSION)
 
-ifeq ($(AOSCP_BUILDTYPE),"unofficial")
+ifeq ($(AOSCP_BUILDTYPE),unofficial)
 	AOSCP_ZIP_VERSION := $(shell date -u +%Y%m%d)
 else
-ifeq ($(AOSCP_BUILDTYPE),"nightly")
+ifeq ($(AOSCP_BUILDTYPE),nightly)
 	AOSCP_ZIP_VERSION := $(shell date -u +%Y%m%d)
 endif # nightly
 endif

@@ -1,9 +1,6 @@
 # Inherit common AOSCP stuff
 $(call inherit-product, vendor/aoscp/configs/common.mk)
 
-# Bring in all video files
-$(call inherit-product, frameworks/base/data/videos/VideoPackage2.mk)
-
 PRODUCT_SIZE := full
 
 # Include AOSCP LatinIME dictionaries

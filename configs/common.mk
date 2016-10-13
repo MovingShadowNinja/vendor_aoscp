@@ -18,13 +18,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.aoscp.display.version=$(AOSCP_DISPLAY_VERSION) \
 	ro.aoscp.releasetype=$(AOSCP_BUILDTYPE) \
 	ro.aoscp.api=$(AOSCP_API)
-	
+
 ifeq ($(AOSCP_BUILDTYPE),)
         # AOSCP_BUILDTYPE is not defined
 	AOSCP_BUILDTYPE := unofficial
-
-    AOSCP_VERSION=$(TARGET_PRODUCT)_$(AOSCP_BUILDTYPE)
 endif
+
+AOSCP_TARGET_ZIP=$(TARGET_PRODUCT)_$(AOSCP_BUILDTYPE)_$(AOSCP_VERSION)
 
 ifneq ($(TARGET_SCREEN_WIDTH) $(TARGET_SCREEN_HEIGHT),$(space))
 # determine the smaller dimension

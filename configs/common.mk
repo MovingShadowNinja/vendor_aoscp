@@ -205,11 +205,10 @@ PRODUCT_PACKAGES += \
     AudioFX \
     CMAudioService \
     CMParts \
-    CMWallpapers \
     CMFileManager \
     CMSettingsProvider \
     ExactCalculator \
-    Launcher3 \
+    Luna \
     LiveLockScreenService \
     LockClock \
 	WallpaperPicker \

@@ -203,6 +203,7 @@ PRODUCT_PACKAGES += \
 # Custom packages
 PRODUCT_PACKAGES += \
     AudioFX \
+	Browser \
     CMAudioService \
     CMParts \
     CMFileManager \

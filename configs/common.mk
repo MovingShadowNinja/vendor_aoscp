@@ -205,7 +205,6 @@ PRODUCT_PACKAGES += \
     AudioFX \
 	Browser \
     CMAudioService \
-    CMParts \
     CMFileManager \
     CMSettingsProvider \
     ExactCalculator \

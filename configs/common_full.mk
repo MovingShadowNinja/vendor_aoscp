@@ -13,7 +13,3 @@ PRODUCT_PACKAGES += \
     libvideoeditor_osal \
     libvideoeditor_videofilters \
     libvideoeditorplayer
-
-# Themes
-PRODUCT_PACKAGES += \
-    HexoLibre

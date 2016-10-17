@@ -217,10 +217,6 @@ PRODUCT_PACKAGES += \
     WeatherProvider \
     SoundRecorder
 
-# Exchange support
-PRODUCT_PACKAGES += \
-    Exchange2
-
 # Extra tools in CM
 PRODUCT_PACKAGES += \
     libsepol \

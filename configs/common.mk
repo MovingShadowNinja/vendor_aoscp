@@ -208,6 +208,7 @@ PRODUCT_PACKAGES += \
     CMAudioService \
     CMFileManager \
     CMSettingsProvider \
+	COTA \
     ExactCalculator \
     Luna \
     LiveLockScreenService \

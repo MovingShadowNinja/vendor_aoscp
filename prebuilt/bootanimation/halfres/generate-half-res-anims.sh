@@ -1,6 +1,6 @@
 #!/bin/sh
 
-HALF_RES_RESOLUTIONS="480 720 768 1080 1440"
+HALF_RES_RESOLUTIONS="480 540 720 768 1080 1440"
 
 for i in $HALF_RES_RESOLUTIONS; do
     rm -f $i.zip
@@ -20,7 +20,7 @@ for i in $HALF_RES_RESOLUTIONS; do
 	    mv tmp.png $j
 	done
     fi
-    zip -r0 ../$i.zip .
+    find -type f | sort | zip -@ -0 ../$i.zip .
     cd ..
     rm -rf $i
 done

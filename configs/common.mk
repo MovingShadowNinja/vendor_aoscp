@@ -203,7 +203,6 @@ PRODUCT_PACKAGES += \
 
 # Custom packages
 PRODUCT_PACKAGES += \
-    AudioFX \
 	Browser \
     CMAudioService \
     CMFileManager \
@@ -211,11 +210,7 @@ PRODUCT_PACKAGES += \
 	COTA \
     ExactCalculator \
     Luna \
-    LiveLockScreenService \
-    LockClock \
 	WallpaperPicker \
-    WeatherManagerService \
-    WeatherProvider \
     SoundRecorder
 
 # Extra tools in CM

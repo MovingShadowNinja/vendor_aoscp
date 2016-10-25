@@ -35,7 +35,7 @@ ifeq ($(AOSCP_BUILDTYPE),nightly)
 endif # nightly
 endif
 
-AOSCP_TARGET_ZIP=$(TARGET_PRODUCT)_$(AOSCP_VERSION)-$(AOSCP_BUILDTYPE)
+AOSCP_TARGET_ZIP=$(TARGET_PRODUCT)_$(AOSCP_ZIP_VERSION)-$(AOSCP_BUILDTYPE)
 
 ifneq ($(TARGET_SCREEN_WIDTH) $(TARGET_SCREEN_HEIGHT),$(space))
 # determine the smaller dimension
@@ -283,7 +283,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     media.sf.omx-plugin=libffmpeg_omx.so \
     media.sf.extractor-plugin=libffmpeg_extractor.so
-	
+
 # Telephony
 PRODUCT_PACKAGES += \
     telephony-ext

@@ -169,9 +169,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/aoscp/configs/permissions/com.aoscp.android.xml:system/etc/permissions/com.aoscp.android.xml
 
-# Include CM audio files
-include vendor/aoscp/configs/cm_audio.mk
-
 # Theme engine
 include vendor/aoscp/configs/themes_common.mk
 

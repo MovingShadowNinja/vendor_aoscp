@@ -41,7 +41,7 @@ Remember to `make clean` every now and then!
 
 ***
 
-Making your thread
+Creating your thread
 ==================
 
 You got your build to compile. Congrats! Now it's time to share it with the world! AOSCP threads simple so it's not much work left to do here.
@@ -52,4 +52,9 @@ Let's start with your thread name. If you are creating a thread for a device tha
 For example: [ROM][7.0_r14]CypherOS "3.0.1"[Bullhead]
 Simple right? Now, if you're creating a thread for a device that's not officially supported by CypherOS, [OFFICIAL] needs to be replaced with [UNOFFICIAL]
 to ensure users know what kind of build they're running. This is important, as it prevents alot of questions and concerns about bugs etc. that weren't generated
-by our team. Now that you've gotten the important part out of the way, copy and paste this code into your thread: 
+by our team. 
+
+Now that you've gotten the important part out of the way, copy and paste [THIS](https://raw.githubusercontent.com/CypherOS/vendor_aoscp/n7.0/BuildAThread.txt)
+into your thread. This is not to be modified! You can only add your own acceptable additions to provide more information to your users.
+
+That's it! Thread complete! Thank you for jumping on board with us!

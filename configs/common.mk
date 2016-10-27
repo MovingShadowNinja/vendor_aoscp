@@ -4,9 +4,9 @@ SUPERUSER_EMBEDDED := true
 
 # Include versioning information
 # Format: Major.minor.maintenance(-TAG)
-export AOSCP_VERSION := 3.0.1
+export AOSCP_VERSION := 3.1
 
-export AOSCP_API := Cheesecake
+export AOSCP_API := Shortcake
 
 AOSCP_DISPLAY_VERSION := $(AOSCP_VERSION)
 

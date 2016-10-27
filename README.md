@@ -1,13 +1,12 @@
-[Android Open Source Cypher Project]
-====================================
+http://i.imgur.com/A0jUjxO.png
 
 
-Download the Source
+Downloading the Source
 ===================
 
 Please read the [AOSP building instructions](http://source.android.com/source/index.html) before proceeding.
 
-Initializing Repository
+Initializing the Repository
 -----------------------
 
 Init core trees without any device/kernel/vendor :
@@ -20,7 +19,7 @@ sync repo :
 
 ***
 
-Building
+Building AOSCP
 --------
 
 After the sync is finished, please read the [instructions from the Android site](http://s.android.com/source/building.html) on how to build.

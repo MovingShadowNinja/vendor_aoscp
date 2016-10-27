@@ -1,5 +1,4 @@
-http://i.imgur.com/A0jUjxO.png
-
+![Aoscp for Devs](http://i.imgur.com/A0jUjxO.png)
 
 Downloading the Source
 ===================
@@ -23,9 +22,11 @@ Building AOSCP
 --------
 
 After the sync is finished, please read the [instructions from the Android site](http://s.android.com/source/building.html) on how to build.
+To build AOSCP first execute this command:
 
     . build/envsetup.sh
-    lunch
+	
+This 
 
 
 You can also build (and see how long it took) for specific devices (eg. hammerhead) like this:

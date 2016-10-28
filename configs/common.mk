@@ -12,6 +12,10 @@ AOSCP_DISPLAY_VERSION := $(AOSCP_VERSION)
 
 export ROM_VERSION := $(AOSCP_VERSION)-$(shell date -u +%Y%m%d)
 
+ifneq ($(RELEASE_TYPE),)
+        AOSCP_BUILDTYPE := $(RELEASE_TYPE)
+endif
+
 ifeq ($(AOSCP_BUILDTYPE),)
         # AOSCP_BUILDTYPE is not defined
 	AOSCP_BUILDTYPE := unofficial

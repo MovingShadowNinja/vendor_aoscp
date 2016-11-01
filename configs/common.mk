@@ -39,7 +39,7 @@ ifeq ($(AOSCP_BUILDTYPE),nightly)
 endif # nightly
 endif
 
-AOSCP_TARGET_ZIP=$(TARGET_PRODUCT)-$(AOSCP_VERSION)-$(AOSCP_ZIP_VERSION)
+AOSCP_TARGET_ZIP=$(TARGET_PRODUCT)-$(AOSCP_ZIP_VERSION)
 
 ifneq ($(TARGET_SCREEN_WIDTH) $(TARGET_SCREEN_HEIGHT),$(space))
 # determine the smaller dimension

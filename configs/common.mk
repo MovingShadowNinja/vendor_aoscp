@@ -207,17 +207,22 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     librsjni
 
-# Custom packages
+# AOSCP Packages
 PRODUCT_PACKAGES += \
 	Browser \
     CMAudioService \
     CMFileManager \
     CMSettingsProvider \
-	COTA \
     ExactCalculator \
     Luna \
 	WallpaperPicker \
     SoundRecorder
+	
+# AOSCP Updates
+ifneq ($(AOSCP_BUILDTYPE),unofficial)
+PRODUCT_PACKAGES +=  \
+   COTA
+endif
 
 # Extra tools in CM
 PRODUCT_PACKAGES += \

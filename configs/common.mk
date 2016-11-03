@@ -215,7 +215,6 @@ PRODUCT_PACKAGES += \
     CMSettingsProvider \
 	COTA \
     ExactCalculator \
-	Gourme \
     Luna \
 	WallpaperPicker \
     SoundRecorder

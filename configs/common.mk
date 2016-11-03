@@ -297,13 +297,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_BOOT_JARS += \
     telephony-ext
 
-# These packages are excluded from user builds
-ifneq ($(TARGET_BUILD_VARIANT),user)
 PRODUCT_PACKAGES += \
     procmem \
     procrank \
     su
-endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.root_access=3

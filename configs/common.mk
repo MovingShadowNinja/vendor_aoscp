@@ -6,6 +6,8 @@ SUPERUSER_EMBEDDED := true
 # Format: Major.minor.maintenance(-TAG)
 export AOSCP_VERSION := 3.1
 
+export AOSCP_RELEASE_ID := CNRC1000
+
 export AOSCP_API := Cheesecake
 
 AOSCP_DISPLAY_VERSION := $(AOSCP_VERSION)
@@ -19,6 +21,7 @@ endif
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.modversion=$(ROM_VERSION) \
     ro.aoscp.version=$(AOSCP_VERSION) \
+	ro.aoscp.release.id=$(AOSCP_RELEASE_ID) \
     ro.aoscp.device=$(AOSCP_DEVICE) \
     ro.aoscp.display.version=$(AOSCP_DISPLAY_VERSION) \
     ro.aoscp.releasetype=$(AOSCP_BUILDTYPE) \

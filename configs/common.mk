@@ -8,7 +8,7 @@ export AOSCP_VERSION := 3.1
 
 export AOSCP_RELEASE_ID := CNRC1000
 
-export AOSCP_API := Cheesecake
+export AOSCP_API_LEVEL := Cheesecake
 
 AOSCP_DISPLAY_VERSION := $(AOSCP_VERSION)
 

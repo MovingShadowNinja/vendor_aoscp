@@ -16,11 +16,6 @@ ifneq ($(RELEASE_TYPE),)
         AOSCP_BUILDTYPE := $(RELEASE_TYPE)
 endif
 
-ifeq ($(AOSCP_BUILDTYPE),)
-        # AOSCP_BUILDTYPE is not defined
-	AOSCP_BUILDTYPE := unofficial
-endif
-
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.modversion=$(ROM_VERSION) \
     ro.aoscp.version=$(AOSCP_VERSION) \
@@ -28,18 +23,26 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.aoscp.display.version=$(AOSCP_DISPLAY_VERSION) \
     ro.aoscp.releasetype=$(AOSCP_BUILDTYPE) \
     ro.aoscp.api=$(AOSCP_API)
+	
+
+AOSCP_TARGET_ZIP=$(TARGET_PRODUCT)-$(AOSCP_ZIP_VERSION)
 
 AOSCP_ZIP_VERSION := $(AOSCP_VERSION)
 
-ifeq ($(AOSCP_BUILDTYPE),unofficial)
-	AOSCP_ZIP_VERSION := $(AOSCP_VERSION)-$(shell date -u +%Y%m%d)-unofficial
+ifdef AOSCP_BUILDTYPE
+    ifeq ($(AOSCP_BUILDTYPE),official)
+	   AOSCP_ZIP_VERSION := $(AOSCP_VERSION)-$(shell date -u +%Y%m%d)
+	endif # Build unofficial
+    ifeq ($(AOSCP_BUILDTYPE),unofficial)
+	   AOSCP_ZIP_VERSION := $(AOSCP_VERSION)-$(shell date -u +%Y%m%d)-unofficial
+	endif # Build unofficial
+    ifeq ($(AOSCP_BUILDTYPE),nightly)
+	   AOSCP_ZIP_VERSION := $(AOSCP_VERSION)-$(shell date -u +%Y%m%d)-nightly
+    endif # Build nightly
 else
-ifeq ($(AOSCP_BUILDTYPE),nightly)
-	AOSCP_ZIP_VERSION := $(AOSCP_VERSION)-$(shell date -u +%Y%m%d)-nightly
-endif # nightly
+#We build unofficial by default
+       AOSCP_ZIP_VERSION := $(AOSCP_VERSION)-$(shell date -u +%Y%m%d)-unofficial
 endif
-
-AOSCP_TARGET_ZIP=$(TARGET_PRODUCT)-$(AOSCP_ZIP_VERSION)
 
 ifneq ($(TARGET_SCREEN_WIDTH) $(TARGET_SCREEN_HEIGHT),$(space))
 # determine the smaller dimension

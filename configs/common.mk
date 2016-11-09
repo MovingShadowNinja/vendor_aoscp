@@ -25,7 +25,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.aoscp.device=$(AOSCP_DEVICE) \
     ro.aoscp.display.version=$(AOSCP_DISPLAY_VERSION) \
     ro.aoscp.releasetype=$(AOSCP_BUILDTYPE) \
-    ro.aoscp.api=$(AOSCP_API)
+    ro.aoscp.api=$(AOSCP_API_LEVEL)
 	
 
 AOSCP_TARGET_ZIP=$(TARGET_PRODUCT)-$(AOSCP_ZIP_VERSION)

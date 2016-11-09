@@ -14,38 +14,26 @@ AOSCP_DISPLAY_VERSION := $(AOSCP_VERSION)
 
 export ROM_VERSION := $(AOSCP_VERSION)-$(shell date -u +%Y%m%d)
 
-ifneq ($(RELEASE_TYPE),)
-        AOSCP_BUILDTYPE := $(RELEASE_TYPE)
-endif
-
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.modversion=$(ROM_VERSION) \
     ro.aoscp.version=$(AOSCP_VERSION) \
-	ro.aoscp.release.id=$(AOSCP_RELEASE_ID) \
+    ro.aoscp.release.id=$(AOSCP_RELEASE_ID) \
     ro.aoscp.device=$(AOSCP_DEVICE) \
     ro.aoscp.display.version=$(AOSCP_DISPLAY_VERSION) \
     ro.aoscp.releasetype=$(AOSCP_BUILDTYPE) \
     ro.aoscp.api=$(AOSCP_API_LEVEL)
-	
 
-AOSCP_TARGET_ZIP=$(TARGET_PRODUCT)-$(AOSCP_ZIP_VERSION)
 
-AOSCP_ZIP_VERSION := $(AOSCP_VERSION)
-
-ifdef AOSCP_BUILDTYPE
-    ifeq ($(AOSCP_BUILDTYPE),official)
-	   AOSCP_ZIP_VERSION := $(AOSCP_VERSION)-$(shell date -u +%Y%m%d)
-	endif # Build unofficial
-    ifeq ($(AOSCP_BUILDTYPE),unofficial)
-	   AOSCP_ZIP_VERSION := $(AOSCP_VERSION)-$(shell date -u +%Y%m%d)-unofficial
-	endif # Build unofficial
-    ifeq ($(AOSCP_BUILDTYPE),nightly)
-	   AOSCP_ZIP_VERSION := $(AOSCP_VERSION)-$(shell date -u +%Y%m%d)-nightly
-    endif # Build nightly
-else
-#We build unofficial by default
-       AOSCP_ZIP_VERSION := $(AOSCP_VERSION)-$(shell date -u +%Y%m%d)-unofficial
+ifneq ($(RELEASE_TYPE),)
+    AOSCP_BUILDTYPE := $(RELEASE_TYPE)
 endif
+
+#We build unofficial by default
+ifndef AOSCP_BUILDTYPE
+    AOSCP_BUILDTYPE := unofficial
+endif
+
+AOSCP_ZIP_VERSION := $(AOSCP_VERSION)-$(shell date -u +%Y%m%d)-$(AOSCP_BUILDTYPE)
 
 ifneq ($(TARGET_SCREEN_WIDTH) $(TARGET_SCREEN_HEIGHT),$(space))
 # determine the smaller dimension
@@ -215,15 +203,15 @@ PRODUCT_PACKAGES += \
 
 # AOSCP Packages
 PRODUCT_PACKAGES += \
-	Browser \
+    Browser \
     CMAudioService \
     CMFileManager \
     CMSettingsProvider \
     ExactCalculator \
     Luna \
-	WallpaperPicker \
+    WallpaperPicker \
     SoundRecorder
-	
+
 # AOSCP Updates
 ifneq ($(AOSCP_BUILDTYPE),unofficial)
 PRODUCT_PACKAGES +=  \

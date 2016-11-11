@@ -14,16 +14,6 @@ AOSCP_DISPLAY_VERSION := $(AOSCP_VERSION)
 
 export ROM_VERSION := $(AOSCP_VERSION)-$(shell date -u +%Y%m%d)
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.modversion=$(ROM_VERSION) \
-    ro.aoscp.version=$(AOSCP_VERSION) \
-    ro.aoscp.release.id=$(AOSCP_RELEASE_ID) \
-    ro.aoscp.device=$(AOSCP_DEVICE) \
-    ro.aoscp.display.version=$(AOSCP_DISPLAY_VERSION) \
-    ro.aoscp.releasetype=$(AOSCP_BUILDTYPE) \
-    ro.aoscp.api=$(AOSCP_API_LEVEL)
-
-
 ifneq ($(RELEASE_TYPE),)
     AOSCP_BUILDTYPE := $(RELEASE_TYPE)
 endif
@@ -32,6 +22,15 @@ endif
 ifndef AOSCP_BUILDTYPE
     AOSCP_BUILDTYPE := unofficial
 endif
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.modversion=$(ROM_VERSION) \
+    ro.aoscp.version=$(AOSCP_VERSION) \
+    ro.aoscp.release.id=$(AOSCP_RELEASE_ID) \
+    ro.aoscp.device=$(AOSCP_DEVICE) \
+    ro.aoscp.display.version=$(AOSCP_DISPLAY_VERSION) \
+    ro.aoscp.releasetype=$(AOSCP_BUILDTYPE) \
+    ro.aoscp.api=$(AOSCP_API_LEVEL)
 
 export AOSCP_TARGET_ZIP := aoscp_$(AOSCP_DEVICE)-$(AOSCP_VERSION)-$(shell date -u +%Y%m%d)-$(AOSCP_BUILDTYPE)
 

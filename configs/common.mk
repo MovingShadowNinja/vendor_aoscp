@@ -203,7 +203,6 @@ PRODUCT_PACKAGES += \
 # AOSCP Packages
 PRODUCT_PACKAGES += \
     Browser \
-	Camero \
     CMAudioService \
     CMFileManager \
     CMSettingsProvider \

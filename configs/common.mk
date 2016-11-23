@@ -216,7 +216,6 @@ PRODUCT_PACKAGES += \
 # AOSCP Updates
 PRODUCT_PACKAGES +=  \
    COTA
-endif
 
 # Extra tools in CM
 PRODUCT_PACKAGES += \

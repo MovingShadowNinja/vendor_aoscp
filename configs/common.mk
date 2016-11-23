@@ -4,9 +4,9 @@ SUPERUSER_EMBEDDED := true
 
 # Include versioning information
 # Format: Major.minor.maintenance(-TAG)
-export AOSCP_VERSION := 3.1.1
+export AOSCP_VERSION := 3.1.2
 
-export AOSCP_RELEASE_ID := CNRC1010
+export AOSCP_RELEASE_ID := CNRC1011
 
 export AOSCP_API_LEVEL := Cheesecake
 
@@ -214,7 +214,6 @@ PRODUCT_PACKAGES += \
     SoundRecorder
 
 # AOSCP Updates
-ifneq ($(AOSCP_BUILDTYPE),unofficial)
 PRODUCT_PACKAGES +=  \
    COTA
 endif

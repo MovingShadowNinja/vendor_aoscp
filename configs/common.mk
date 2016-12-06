@@ -205,7 +205,6 @@ PRODUCT_PACKAGES += \
 # AOSCP Packages
 PRODUCT_PACKAGES += \
     Browser \
-    CMAudioService \
     CMFileManager \
     CMSettingsProvider \
     ExactCalculator \

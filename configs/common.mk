@@ -4,11 +4,11 @@ SUPERUSER_EMBEDDED := true
 
 # Include versioning information
 # Format: Major.minor.maintenance(-TAG)
-export AOSCP_VERSION := 3.x-dev
+export AOSCP_VERSION := 3.5
 
-export AOSCP_RELEASE_ID := CNRC1013
+export AOSCP_RELEASE_ID := CNRC1214
 
-export AOSCP_API_LEVEL := Internal
+export AOSCP_API_LEVEL := ????
 
 AOSCP_DISPLAY_VERSION := $(AOSCP_VERSION)
 
@@ -188,7 +188,6 @@ PRODUCT_PACKAGES += \
     CellBroadcastReceiver \
     LatinIME \
     LatinImeDictionaryPack \
-    Microbes \
     Stk
 
 # Optional AOSCP packages
@@ -206,7 +205,6 @@ PRODUCT_PACKAGES += \
 # AOSCP Packages
 PRODUCT_PACKAGES += \
     Browser \
-    CMFileManager \
     CMSettingsProvider \
     ExactCalculator \
     Luna \
